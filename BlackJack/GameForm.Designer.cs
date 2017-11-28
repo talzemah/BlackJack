@@ -75,12 +75,12 @@
             this.Lbl_p2_name = new System.Windows.Forms.Label();
             this.Lbl_p3_totalSum = new System.Windows.Forms.Label();
             this.Lbl_p3_name = new System.Windows.Forms.Label();
-            this.Lbl_p1_totalCards = new System.Windows.Forms.Label();
-            this.Lbl_p2_totalCards = new System.Windows.Forms.Label();
-            this.Lbl_p3_totalCards = new System.Windows.Forms.Label();
-            this.Lbl_dealer_totalCards = new System.Windows.Forms.Label();
+            this.Lbl_p1_cardsSum = new System.Windows.Forms.Label();
+            this.Lbl_p2_cardsSum = new System.Windows.Forms.Label();
+            this.Lbl_p3_cardsSum = new System.Windows.Forms.Label();
+            this.Lbl_dealer_cardsSum = new System.Windows.Forms.Label();
             this.Btn_double = new System.Windows.Forms.Button();
-            this.gameOverTextBox = new System.Windows.Forms.TextBox();
+            this.Tb_status = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.Pb_cardsDeck1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Pb_cardsDeck2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Pb_cardsDeck3)).BeginInit();
@@ -620,39 +620,39 @@
             // 
             // Lbl_p1_totalCards
             // 
-            this.Lbl_p1_totalCards.AutoSize = true;
-            this.Lbl_p1_totalCards.Location = new System.Drawing.Point(76, 170);
-            this.Lbl_p1_totalCards.Name = "Lbl_p1_totalCards";
-            this.Lbl_p1_totalCards.Size = new System.Drawing.Size(24, 17);
-            this.Lbl_p1_totalCards.TabIndex = 47;
-            this.Lbl_p1_totalCards.Text = "00";
+            this.Lbl_p1_cardsSum.AutoSize = true;
+            this.Lbl_p1_cardsSum.Location = new System.Drawing.Point(76, 170);
+            this.Lbl_p1_cardsSum.Name = "Lbl_p1_totalCards";
+            this.Lbl_p1_cardsSum.Size = new System.Drawing.Size(24, 17);
+            this.Lbl_p1_cardsSum.TabIndex = 47;
+            this.Lbl_p1_cardsSum.Text = "00";
             // 
             // Lbl_p2_totalCards
             // 
-            this.Lbl_p2_totalCards.AutoSize = true;
-            this.Lbl_p2_totalCards.Location = new System.Drawing.Point(464, 318);
-            this.Lbl_p2_totalCards.Name = "Lbl_p2_totalCards";
-            this.Lbl_p2_totalCards.Size = new System.Drawing.Size(24, 17);
-            this.Lbl_p2_totalCards.TabIndex = 48;
-            this.Lbl_p2_totalCards.Text = "00";
+            this.Lbl_p2_cardsSum.AutoSize = true;
+            this.Lbl_p2_cardsSum.Location = new System.Drawing.Point(464, 318);
+            this.Lbl_p2_cardsSum.Name = "Lbl_p2_totalCards";
+            this.Lbl_p2_cardsSum.Size = new System.Drawing.Size(24, 17);
+            this.Lbl_p2_cardsSum.TabIndex = 48;
+            this.Lbl_p2_cardsSum.Text = "00";
             // 
             // Lbl_p3_totalCards
             // 
-            this.Lbl_p3_totalCards.AutoSize = true;
-            this.Lbl_p3_totalCards.Location = new System.Drawing.Point(884, 173);
-            this.Lbl_p3_totalCards.Name = "Lbl_p3_totalCards";
-            this.Lbl_p3_totalCards.Size = new System.Drawing.Size(24, 17);
-            this.Lbl_p3_totalCards.TabIndex = 49;
-            this.Lbl_p3_totalCards.Text = "00";
+            this.Lbl_p3_cardsSum.AutoSize = true;
+            this.Lbl_p3_cardsSum.Location = new System.Drawing.Point(884, 173);
+            this.Lbl_p3_cardsSum.Name = "Lbl_p3_totalCards";
+            this.Lbl_p3_cardsSum.Size = new System.Drawing.Size(24, 17);
+            this.Lbl_p3_cardsSum.TabIndex = 49;
+            this.Lbl_p3_cardsSum.Text = "00";
             // 
             // Lbl_dealer_totalCards
             // 
-            this.Lbl_dealer_totalCards.AutoSize = true;
-            this.Lbl_dealer_totalCards.Location = new System.Drawing.Point(465, 123);
-            this.Lbl_dealer_totalCards.Name = "Lbl_dealer_totalCards";
-            this.Lbl_dealer_totalCards.Size = new System.Drawing.Size(24, 17);
-            this.Lbl_dealer_totalCards.TabIndex = 50;
-            this.Lbl_dealer_totalCards.Text = "00";
+            this.Lbl_dealer_cardsSum.AutoSize = true;
+            this.Lbl_dealer_cardsSum.Location = new System.Drawing.Point(465, 123);
+            this.Lbl_dealer_cardsSum.Name = "Lbl_dealer_totalCards";
+            this.Lbl_dealer_cardsSum.Size = new System.Drawing.Size(24, 17);
+            this.Lbl_dealer_cardsSum.TabIndex = 50;
+            this.Lbl_dealer_cardsSum.Text = "00";
             // 
             // Btn_double
             // 
@@ -666,14 +666,14 @@
             // 
             // gameOverTextBox
             // 
-            this.gameOverTextBox.BackColor = System.Drawing.Color.White;
-            this.gameOverTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.gameOverTextBox.Location = new System.Drawing.Point(81, 13);
-            this.gameOverTextBox.Name = "gameOverTextBox";
-            this.gameOverTextBox.ReadOnly = true;
-            this.gameOverTextBox.Size = new System.Drawing.Size(300, 30);
-            this.gameOverTextBox.TabIndex = 52;
-            this.gameOverTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.Tb_status.BackColor = System.Drawing.Color.White;
+            this.Tb_status.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.Tb_status.Location = new System.Drawing.Point(81, 13);
+            this.Tb_status.Name = "gameOverTextBox";
+            this.Tb_status.ReadOnly = true;
+            this.Tb_status.Size = new System.Drawing.Size(300, 30);
+            this.Tb_status.TabIndex = 52;
+            this.Tb_status.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // GameForm
             // 
@@ -682,12 +682,12 @@
             this.BackgroundImage = global::BlackJack.Properties.Resources.tableBackground;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1182, 673);
-            this.Controls.Add(this.gameOverTextBox);
+            this.Controls.Add(this.Tb_status);
             this.Controls.Add(this.Btn_double);
-            this.Controls.Add(this.Lbl_dealer_totalCards);
-            this.Controls.Add(this.Lbl_p3_totalCards);
-            this.Controls.Add(this.Lbl_p2_totalCards);
-            this.Controls.Add(this.Lbl_p1_totalCards);
+            this.Controls.Add(this.Lbl_dealer_cardsSum);
+            this.Controls.Add(this.Lbl_p3_cardsSum);
+            this.Controls.Add(this.Lbl_p2_cardsSum);
+            this.Controls.Add(this.Lbl_p1_cardsSum);
             this.Controls.Add(this.Lbl_p3_totalSum);
             this.Controls.Add(this.Lbl_p3_name);
             this.Controls.Add(this.Lbl_p2_totalSum);
@@ -821,11 +821,11 @@
         private System.Windows.Forms.Label Lbl_p2_name;
         private System.Windows.Forms.Label Lbl_p3_totalSum;
         private System.Windows.Forms.Label Lbl_p3_name;
-        private System.Windows.Forms.Label Lbl_p1_totalCards;
-        private System.Windows.Forms.Label Lbl_p2_totalCards;
-        private System.Windows.Forms.Label Lbl_p3_totalCards;
-        private System.Windows.Forms.Label Lbl_dealer_totalCards;
+        private System.Windows.Forms.Label Lbl_p1_cardsSum;
+        private System.Windows.Forms.Label Lbl_p2_cardsSum;
+        private System.Windows.Forms.Label Lbl_p3_cardsSum;
+        private System.Windows.Forms.Label Lbl_dealer_cardsSum;
         private System.Windows.Forms.Button Btn_double;
-        private System.Windows.Forms.TextBox gameOverTextBox;
+        private System.Windows.Forms.TextBox Tb_status;
     }
 }

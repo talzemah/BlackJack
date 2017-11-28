@@ -31,10 +31,10 @@ namespace BlackJack.Logic
             this.isCardUp = isCardUp;
         }
 
-        // Return the card as a string (i.e. "The Ace of Spades")
-        public override string ToString()
-        {
-            return "The" + cardValue.ToString() + "of" + cardType.ToString();
-        }
+        /// Return the card as a string (i.e. "The Ace of Spades")
+        //public override string ToString()
+        //{
+        //    return "The" + cardValue.ToString() + "of" + cardType.ToString();
+        //}
     }
 }

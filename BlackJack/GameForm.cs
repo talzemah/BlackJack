@@ -1,50 +1,48 @@
 ﻿using BlackJack.Logic;
-using System.Drawing;
-using System.Windows.Forms;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Text;
+using System.Windows.Forms;
 
 namespace BlackJack
 {
     public partial class GameForm : Form
     {
-
-        #region Fields
         //Creates a new blackjack game with one player and an inital balance set through the settings designer
         private BlackJackGame game = new BlackJackGame(Properties.Settings.Default.InitBalance);
-        private PictureBox[] playerCards;
+        private PictureBox[] player_1Cards;
         private PictureBox[] dealerCards;
-        private bool firstTurn;
-        #endregion
+        private bool isFirstTurn;
 
+        // Constractor
         public GameForm()
         {
             InitializeComponent();
-            LoadCardSkinImages();
+            LoadPictureBox();
+            Foo();
             SetUpNewGame();
         }
 
-        // Load the Deck Card Images
-        private void LoadCardSkinImages()
+        // Load the picture box for each hand
+        private void LoadPictureBox()
         {
             dealerCards = new PictureBox[] { Pb_dealer_1, Pb_dealer_2, Pb_dealer_3, Pb_dealer_4, Pb_dealer_5, Pb_dealer_6 };
-            playerCards = new PictureBox[] { Pb_P1_1, Pb_P1_2, Pb_P1_3, Pb_P1_4, Pb_P1_5, Pb_P1_6 };
+            player_1Cards = new PictureBox[] { Pb_P1_1, Pb_P1_2, Pb_P1_3, Pb_P1_4, Pb_P1_5, Pb_P1_6 };
         }
 
         // Set up the UI for a new game
         private void SetUpNewGame()
         {
-            ///photoPictureBox.ImageLocation = Properties.Settings.Default.PlayerImage;
-            ///photoPictureBox.Visible = true;
-            gameOverTextBox.Hide();
+            Lbl_p1_name.Show();
+            Lbl_p1_totalSum.Show();
+            Lbl_p1_name.Text = Properties.Settings.Default.Player_1Name;
 
-            Lbl_p1_name.Text = "Tal Zemah"; /// Properties.Settings.Default.PlayerName;
-
-            Btn_deal.Enabled = true;
             Btn_stand.Enabled = false;
             Btn_hit.Enabled = false;
             Btn_double.Enabled = false;
+
+            Btn_deal.Enabled = true;
             Btn_clear.Enabled = true;
 
             Btn_10.Enabled = true;
@@ -52,24 +50,39 @@ namespace BlackJack
             Btn_50.Enabled = true;
             Btn_100.Enabled = true;
 
-            if (Lbl_p1_totalCards.Text.Equals("00"))
-            {
-                Lbl_p1_totalCards.Hide();
-            }
-            
+            isFirstTurn = true;
+            ShowBalanceAndBetValue();
+        }
+
+        public void Foo()
+        {
+            Tb_status.Hide();
+
+            Lbl_dealer_status.Hide();
+            Lbl_dealer_cardsSum.Hide();
+
+            Lbl_p1_name.Hide();
+            Lbl_p1_totalSum.Hide();
             Lbl_p1_status.Hide();
-            firstTurn = true;
-            ShowBankValue();
+            Lbl_p1_cardsSum.Hide();
+
+            Lbl_p2_name.Hide();
+            Lbl_p2_totalSum.Hide();
+            Lbl_p2_status.Hide();
+            Lbl_p2_cardsSum.Hide();
+
+            Lbl_p3_name.Hide();
+            Lbl_p3_totalSum.Hide();
+            Lbl_p3_status.Hide();
+            Lbl_p3_cardsSum.Hide();
         }
 
         // Set the "My Account" value in the UI
-        private void ShowBankValue()
+        private void ShowBalanceAndBetValue()
         {
             // Update the "My Account" value
             Lbl_p1_totalSum.Text = "$" + game.CurrentPlayer.Balance.ToString();
-            ///Lbl_p1_totalSum.Text = "$" + 3000;
             Tb_myBet.Text = "$" + game.CurrentPlayer.Bet.ToString();
-            ///Tb_myBet.Text = "$" + 0;
         }
 
 
@@ -87,13 +100,13 @@ namespace BlackJack
                 {
                     // Place the bet
                     game.CurrentPlayer.PlaceBet();
-                    ShowBankValue();
+                    ShowBalanceAndBetValue();
 
                     // Clear the table, set up the UI for playing a game, and deal a new game
-                    ClearTable();
-                    SetUpGameInPlay();
+                    ClearCardsOnTable();
+                    UpdateUIButtons();
                     game.DealNewGame();
-                    UpdateUIPlayerCards();
+                    UpdateUICards();
 
                     // Check see if the current player has blackjack
                     if (game.CurrentPlayer.HasBlackJack())
@@ -108,54 +121,57 @@ namespace BlackJack
             }
         }
 
-        // Clear the dealer and player cards
-        private void ClearTable()
+        // Clear all cards on table
+        private void ClearCardsOnTable()
         {
             for (int i = 0; i < 6; i++)
             {
                 dealerCards[i].Image = null;
                 dealerCards[i].Visible = false;
 
-                playerCards[i].Image = null;
-                playerCards[i].Visible = false;
+                player_1Cards[i].Image = null;
+                player_1Cards[i].Visible = false;
             }
         }
 
         // Set up the UI for when the game is in play after the player has hit deal game
-        private void SetUpGameInPlay()
+        private void UpdateUIButtons()
         {
+            Btn_deal.Enabled = false;
+            Btn_clear.Enabled = false;
+
             Btn_10.Enabled = false;
             btn_25.Enabled = false;
             Btn_50.Enabled = false;
             Btn_100.Enabled = false;
 
-            Btn_clear.Enabled = false;
             Btn_stand.Enabled = true;
             Btn_hit.Enabled = true;
-
-            gameOverTextBox.Hide();
-
-            Lbl_p1_totalCards.Show();
-            Btn_deal.Enabled = false;
-
-            if (firstTurn)
+            if (isFirstTurn)
                 Btn_double.Enabled = true;
+
+            Tb_status.Hide();
+            Lbl_p1_cardsSum.Show();
+            Lbl_dealer_cardsSum.Show();
         }
 
-        // Refresh the UI to update the player cards
-        private void UpdateUIPlayerCards()
+        // Refresh the UI to show appropriate cards
+        private void UpdateUICards()
         {
-            // Update the value of the hand
-            Lbl_p1_totalCards.Text = game.CurrentPlayer.Hand.GetSumOfHand().ToString();
+            // Update the value of the player_1 hand
+            Lbl_p1_cardsSum.Text = game.CurrentPlayer.Hand.GetSumOfHand().ToString();
 
             List<Card> pcards = game.CurrentPlayer.Hand.Cards;
             for (int i = 0; i < pcards.Count; i++)
             {
                 // Load each card from file
-                LoadCard(playerCards[i], pcards[i]);
-                playerCards[i].Visible = true;
-                playerCards[i].BringToFront();
+                LoadCard(player_1Cards[i], pcards[i]);
+                player_1Cards[i].Visible = true;
+                player_1Cards[i].BringToFront();
             }
+
+            // Update the value of the dealer hand
+            Lbl_dealer_cardsSum.Text = game.Dealer.Hand.GetSumOfHand().ToString();
 
             List<Card> dcards = game.Dealer.Hand.Cards;
             for (int i = 0; i < dcards.Count; i++)
@@ -166,7 +182,7 @@ namespace BlackJack
             }
         }
 
-        // Takes the card value and loads the corresponding card image from file
+        // Takes the card type and value and loads the corresponding card image
         private void LoadCard(PictureBox pb, Card c)
         {
             try
@@ -232,14 +248,14 @@ namespace BlackJack
                         break;
                 }
 
-                ///image.Append(".png");
-                image.Append(Properties.Settings.Default.CardGameImageExtension);
-                string cardGameImagePath = Properties.Settings.Default.CardGameImagePath;
-                string cardGameImageSkinPath = Properties.Settings.Default.CardGameImageSkinPath;
-                image.Insert(0, cardGameImagePath);
+                image.Append(Properties.Settings.Default.CardImageExtension);
+
+                string cardImagePath = Properties.Settings.Default.CardImagePath;
+                image.Insert(0, cardImagePath);
+
                 //check to see if the card should be faced down or up;
                 if (!c.IsCardUp)
-                    image.Replace(image.ToString(), cardGameImageSkinPath);
+                    image.Replace(image.ToString(), Properties.Settings.Default.CardImageSkinPath);
 
                 ///pb.Image = new Bitmap(image.ToString());
                 pb.BackgroundImage = new Bitmap(image.ToString());
@@ -250,51 +266,48 @@ namespace BlackJack
             }
         }
 
-
         // Takes an EndResult value and shows the resulting game ending in the UI
         private void EndGame(EndResult endState)
         {
             switch (endState)
             {
                 case EndResult.DealerBust:
-                    gameOverTextBox.Text = "Dealer Bust!";
+                    Tb_status.Text = "Dealer Bust!";
                     game.PlayerWin();
                     break;
+
                 case EndResult.DealerBlackJack:
-                    gameOverTextBox.Text = "Dealer BlackJack!";
-                    game.PlayerLose();
+                    Tb_status.Text = "Dealer BlackJack!";
                     break;
+
                 case EndResult.DealerWin:
-                    gameOverTextBox.Text = "Dealer Won!";
-                    game.PlayerLose();
+                    Tb_status.Text = "Dealer Won!";
                     break;
+
                 case EndResult.PlayerBlackJack:
-                    gameOverTextBox.Text = "BlackJack!";
+                    Tb_status.Text = "PlayerBlackJack!";
                     game.CurrentPlayer.Balance += (game.CurrentPlayer.Bet * (decimal)2.5);
-                    game.CurrentPlayer.Wins += 1;
                     break;
+
                 case EndResult.PlayerBust:
-                    gameOverTextBox.Text = "You Bust!";
-                    game.PlayerLose();
+                    Tb_status.Text = "PlayerBust!";
                     break;
+
                 case EndResult.PlayerWin:
-                    gameOverTextBox.Text = "You Won!";
+                    Tb_status.Text = "Player Won!";
                     game.PlayerWin();
                     break;
+
                 case EndResult.Push:
-                    gameOverTextBox.Text = "Push";
-                    game.CurrentPlayer.Push += 1;
+                    Tb_status.Text = "Push";
                     game.CurrentPlayer.Balance += game.CurrentPlayer.Bet;
                     break;
             }
-            // Update the "My Record" values
-            ///winTextBox.Text = game.CurrentPlayer.Wins.ToString();
-            ///lossTextBox.Text = game.CurrentPlayer.Losses.ToString();
-            ///tiesTextBox.Text = game.CurrentPlayer.Push.ToString();
 
             SetUpNewGame();
-            ShowBankValue();
-            gameOverTextBox.Show();
+            ShowBalanceAndBetValue();
+            Tb_status.Show();
+
             // Check if the current player is out of money
             if (game.CurrentPlayer.Balance == 0)
             {
@@ -312,7 +325,7 @@ namespace BlackJack
                 game.CurrentPlayer.IncreaseBet(betValue);
 
                 // Update the "My Bet" and "My Account" values
-                ShowBankValue();
+                ShowBalanceAndBetValue();
             }
             catch (Exception NotEnoughMoneyException)
             {
@@ -348,7 +361,7 @@ namespace BlackJack
         private void Btn_clear_Click(object sender, EventArgs e)
         {
             game.CurrentPlayer.ClearBet();
-            ShowBankValue();
+            ShowBalanceAndBetValue();
         }
 
         // Invoked when the player has finished their turn and clicked the stand button
@@ -356,41 +369,47 @@ namespace BlackJack
         {
             // Dealer should finish playing and the UI should be updated
             game.DealerPlay();
-            UpdateUIPlayerCards();
+            UpdateUICards();
 
             // Check who won the game
             EndGame(GetGameResult());
         }
 
-        // Get the game result.  This returns an EndResult value
+        // Get the game result, This returns an EndResult value
         private EndResult GetGameResult()
         {
             EndResult endState;
+
             // Check for blackjack
             if (game.Dealer.Hand.NumCards == 2 && game.Dealer.HasBlackJack())
             {
                 endState = EndResult.DealerBlackJack;
             }
+
             // Check if the dealer has bust
             else if (game.Dealer.HasBust())
             {
                 endState = EndResult.DealerBust;
             }
-            else if (game.Dealer.Hand.CompareFaceValue(game.CurrentPlayer.Hand) > 0)
+
+            // Check if the ealer wins
+            else if (game.Dealer.Hand.CompareHandsValue(game.CurrentPlayer.Hand) > 0)
             {
-                //dealer wins
                 endState = EndResult.DealerWin;
             }
-            else if (game.Dealer.Hand.CompareFaceValue(game.CurrentPlayer.Hand) == 0)
+
+            // Check if the result is equals (push)
+            else if (game.Dealer.Hand.CompareHandsValue(game.CurrentPlayer.Hand) == 0)
             {
-                // push
                 endState = EndResult.Push;
             }
+
+            // player wins
             else
             {
-                // player wins
                 endState = EndResult.PlayerWin;
             }
+
             return endState;
         }
 
@@ -398,10 +417,13 @@ namespace BlackJack
         private void Btn_hit_Click(object sender, EventArgs e)
         {
             // It is no longer the first turn, set this to false so that the cards will all be facing upwards
-            firstTurn = false;
+            isFirstTurn = false;
+
+            Btn_double.Enabled = false;
+
             // Hit once and update UI cards
             game.CurrentPlayer.Hit();
-            UpdateUIPlayerCards();
+            UpdateUICards();
 
             // Check to see if player has bust
             if (game.CurrentPlayer.HasBust())
@@ -416,20 +438,21 @@ namespace BlackJack
             try
             {
                 // Double the player's bet amount
-                game.CurrentPlayer.DoubleDown();
-                UpdateUIPlayerCards();
-                ShowBankValue();
+                game.CurrentPlayer.DoubleBet();
+                UpdateUICards();
+                ShowBalanceAndBetValue();
 
                 //Make sure that the player didn't bust
                 if (game.CurrentPlayer.HasBust())
                 {
                     EndGame(EndResult.PlayerBust);
                 }
+
+                // Otherwise, let the dealer finish playing
                 else
                 {
-                    // Otherwise, let the dealer finish playing
                     game.DealerPlay();
-                    UpdateUIPlayerCards();
+                    UpdateUICards();
                     EndGame(GetGameResult());
                 }
             }
@@ -439,7 +462,6 @@ namespace BlackJack
             }
         }
 
-        
 
     }
 }

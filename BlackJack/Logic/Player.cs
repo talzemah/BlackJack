@@ -9,56 +9,40 @@ namespace BlackJack.Logic
         private decimal balance;
         private BlackJackHand hand;
         private decimal bet;
-        private int wins;
-        private int losses;
-        private int pushes;
-        private string image;
         private string name;
         private Deck currentDeck;
+
         // Creates a list of cards
         private List<Card> cards = new List<Card>();
 
         public Deck CurrentDeck { get { return currentDeck; } set { currentDeck = value; } }
-        public string Image { get { return image; } set { image = value; } }
         public BlackJackHand Hand { get { return hand; } }
         public string Name { get { return name; } set { name = value; } }
         public decimal Bet { get { return bet; } set { bet = value; } }
         public decimal Balance { get { return balance; } set { balance = value; } }
-        public int Wins { get { return wins; } set { wins = value; } }
-        public int Losses { get { return losses; } set { losses = value; } }
-        public int Push { get { return pushes; } set { pushes = value; } }
 
-        
-        ///<summary>
-        /// Creates a player with a default balance account (i.e. it doesn't matter what the dealer's balance is)
-        /// </summary>
+
+        // Creates a player with a default balance account (i.e. it doesn't matter what the dealer's balance is)
         public Player() : this(-1) { }
 
-        /// <summary>
-        ///  Creates a player with a new hand and new balance
-        /// </summary>
-        /// <param name="newBalance"></param>
+        //  Creates a player with a new hand and new balance
         public Player(int newBalance)
         {
-            // Sets the player's image and name that is displayed in the picture frame in the UI.
-            
-            ///this.image = Properties.Settings.Default.PlayerImage;
-            ///this.name = Properties.Settings.Default.PlayerName;
+            // Sets the player's name that is displayed in the UI.
+            this.name = Properties.Settings.Default.Player_1Name;
             this.hand = new BlackJackHand();
             this.balance = newBalance;
         }
 
-        /// <summary>
-        /// Increases the bet amount each time a bet is added to the hand.  Invoked through the betting coins in the BlackJackForm.cs UI
-        /// </summary>
-        /// <param name="amt"></param>
-        public void IncreaseBet(decimal amt)
+        // Increases the bet amount each time a bet is added to the hand
+        // Invoked through the betting coins in the BlackJackForm.cs UI
+        public void IncreaseBet(decimal amount)
         {
             // Check to see if the user has enough money to make this bet
-            if ((balance - (bet + amt)) >= 0)
+            if ((balance - (bet + amount)) >= 0)
             {
                 // Add money to the bet
-                bet += amt;
+                bet += amount;
             }
             else
             {
@@ -66,9 +50,7 @@ namespace BlackJack.Logic
             }
         }
 
-        /// <summary>
-        /// Places the bet and subtracts the amount from "My Account"
-        /// </summary>
+        // Places the bet and subtracts the amount from "My Account"
         public void PlaceBet()
         {
             // Check to see if the user has enough money to place this bet
@@ -82,39 +64,27 @@ namespace BlackJack.Logic
             }
         }
 
-        /// <summary>
-        /// Creates a new hand for the current player
-        /// </summary>
-        /// <returns>BlackJackHand</returns>
-        public BlackJackHand NewHand()
+        // Reset the hand
+        public void NewHand()
         {
             this.hand = new BlackJackHand();
-            return this.hand;
         }
 
-        /// <summary>
-        /// Set the bet value back to 0
-        /// </summary>
+        // Set the bet value back to 0
         public void ClearBet()
         {
             bet = 0;
         }
 
-        /// <summary>
-        /// Check if the current player has BlackJack
-        /// </summary>
-        /// <returns>Returns true if the current player has BlackJack</returns>
+        // Check if the hand has BlackJack
         public bool HasBlackJack()
         {
-            if (hand.GetSumOfHand() == 21)
+            if (hand.GetSumOfHand() == 21 && hand.Cards.Count == 2)
                 return true;
             else return false;
         }
 
-        /// <summary>
-        /// Check if the current player has bust
-        /// </summary>
-        /// <returns>returns true if the current player has bust</returns>
+        // Check if the hand has bust
         public bool HasBust()
         {
             if (hand.GetSumOfHand() > 21)
@@ -122,24 +92,22 @@ namespace BlackJack.Logic
             else return false;
         }
 
-        /// <summary>
-        /// Player has hit, draw a card from the deck and add it to the player's hand
-        /// </summary>
+        // Draw a card from the deck and add it to the hand
         public void Hit()
         {
-            Card c = currentDeck.Draw();
-            hand.Cards.Add(c);
+            Card tempCard = currentDeck.Draw();
+            hand.Cards.Add(tempCard);
         }
 
-        /// <summary>
-        /// Player has chosen to double down, double the player's bet and hit once
-        /// </summary>
-        public void DoubleDown()
+        // Player has chosen to double down, double the player's bet and hit once
+        public void DoubleBet()
         {
             IncreaseBet(Bet);
+
             // Only decrease the balance by half of the current bet
             balance = balance - (bet / 2);
             Hit();
         }
+
     }
 }

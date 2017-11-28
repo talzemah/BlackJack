@@ -26,39 +26,51 @@ namespace BlackJack.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute(".png")]
-        public string CardGameImageExtension {
+        public string CardImageExtension {
             get {
-                return ((string)(this["CardGameImageExtension"]));
+                return ((string)(this["CardImageExtension"]));
             }
         }
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("..\\..\\resources\\")]
-        public string CardGameImagePath {
+        public string CardImagePath {
             get {
-                return ((string)(this["CardGameImagePath"]));
+                return ((string)(this["CardImagePath"]));
             }
         }
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("..\\..\\resources\\black.png")]
-        public string CardGameImageSkinPath {
+        public string CardImageSkinPath {
             get {
-                return ((string)(this["CardGameImageSkinPath"]));
+                return ((string)(this["CardImageSkinPath"]));
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("4000")]
+        [global::System.Configuration.DefaultSettingValueAttribute("2000")]
         public int InitBalance {
             get {
                 return ((int)(this["InitBalance"]));
             }
             set {
                 this["InitBalance"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Tal Zemah")]
+        public string Player_1Name {
+            get {
+                return ((string)(this["Player_1Name"]));
+            }
+            set {
+                this["Player_1Name"] = value;
             }
         }
     }

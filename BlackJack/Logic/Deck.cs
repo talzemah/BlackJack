@@ -10,16 +10,18 @@ namespace BlackJack.Logic
 
         // Returns the card at the given position
         public Card this[int position] { get { return (Card)cards[position]; } }
-        
 
-        // One complete deck (52 cards)
+        // Complete deck (52 cards) X 6.
         public Deck()
         {
-            foreach (CardType type in Enum.GetValues(typeof(CardType)))
+            for (int i = 0; i < 6; i++)
             {
-                foreach (CardValue value in Enum.GetValues(typeof(CardValue)))
+                foreach (CardType type in Enum.GetValues(typeof(CardType)))
                 {
-                    cards.Add(new Card(type, value, true));
+                    foreach (CardValue value in Enum.GetValues(typeof(CardValue)))
+                    {
+                        cards.Add(new Card(type, value, true));
+                    }
                 }
             }
         }

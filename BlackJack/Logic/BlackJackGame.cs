@@ -2,27 +2,17 @@
 {
     public class BlackJackGame
     {
-        #region Fields
         // private Deck and Player objects for the current deck, dealer, and player
         private Deck deck;
         private Player dealer;
         private Player player;
-        #endregion
 
-
-        #region Properties
         // public properties to return the current player, dealer, and current deck
         public Player CurrentPlayer { get { return player; } }
         public Player Dealer { get { return dealer; } }
         public Deck CurrentDeck { get { return deck; } }
-        #endregion
 
-
-        #region Main Game Constructor
-        /// <summary>
-        /// Main Constructor for BlackJack Game
-        /// </summary>
-        /// <param name="initBalance"></param>
+        // Constructor for BlackJack Game
         public BlackJackGame(int initBalance)
         {
             // Create a dealer and one player with the initial balance.
@@ -30,13 +20,7 @@
             player = new Player(initBalance);
         }
 
-        #endregion
-
-        #region Game Methods
-
-        /// <summary>
-        /// Deals a new game.  This is invoked through the Deal button in BlackJackForm.cs
-        /// </summary>
+        // Deals a new game.  This is invoked through the Deal button in GameForm.cs
         public void DealNewGame()
         {
             // Create a new deck and then shuffle the deck
@@ -50,15 +34,15 @@
             // Deal two cards to each person's hand
             for (int i = 0; i < 2; i++)
             {
-                Card c = deck.Draw();
-                player.Hand.Cards.Add(c);
+                Card tempCard = deck.Draw();
+                player.Hand.Cards.Add(tempCard);
 
-                Card d = deck.Draw();
+                tempCard = deck.Draw();
                 // Set the dealer's second card to be facing down
                 if (i == 1)
-                    d.IsCardUp = false;
+                    tempCard.IsCardUp = false;
 
-                dealer.Hand.Cards.Add(d);
+                dealer.Hand.Cards.Add(tempCard);
             }
 
             // Give the player and the dealer a handle to the current deck
@@ -66,9 +50,7 @@
             dealer.CurrentDeck = deck;
         }
 
-        /// <summary>
-        /// This method finishes playing the dealer's hand
-        /// </summary>
+        // This method finishes playing the dealer's hand
         public void DealerPlay()
         {
             // Dealer's card that was facing down is turned up when they start playing
@@ -76,29 +58,17 @@
 
             // Check to see if dealer has a hand that is less than 17
             // If so, dealer should keep hitting until their hand is greater or equal to 17
-            if (dealer.Hand.GetSumOfHand() < 17)
+            while (dealer.Hand.GetSumOfHand() < 17)
             {
                 dealer.Hit();
-                DealerPlay();
             }
+
         }
 
-        /// <summary>
-        /// Update the player's record with a loss
-        /// </summary>
-        public void PlayerLose()
-        {
-            player.Losses += 1;
-        }
-
-        /// <summary>
-        /// Update the player's record with a win
-        /// </summary>
+        // Update player's win
         public void PlayerWin()
         {
             player.Balance += player.Bet * 2;
-            player.Wins += 1;
         }
-        #endregion
     }
 }
