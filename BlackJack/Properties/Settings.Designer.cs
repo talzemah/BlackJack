@@ -64,13 +64,13 @@ namespace BlackJack.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Tal Zemah")]
-        public string Player_1Name {
+        [global::System.Configuration.DefaultSettingValueAttribute("guest")]
+        public string PlayerName {
             get {
-                return ((string)(this["Player_1Name"]));
+                return ((string)(this["PlayerName"]));
             }
             set {
-                this["Player_1Name"] = value;
+                this["PlayerName"] = value;
             }
         }
     }

@@ -34,10 +34,10 @@
             // Deal two cards to each person's hand
             for (int i = 0; i < 2; i++)
             {
-                Card tempCard = deck.Draw();
+                Card tempCard = deck.DrawCard();
                 player.Hand.Cards.Add(tempCard);
 
-                tempCard = deck.Draw();
+                tempCard = deck.DrawCard();
                 // Set the dealer's second card to be facing down
                 if (i == 1)
                     tempCard.IsCardUp = false;

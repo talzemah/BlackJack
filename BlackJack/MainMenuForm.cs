@@ -1,17 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace BlackJack
 {
     public partial class MainMenuForm : Form
     {
+        GameForm gameForm1;
+        GameForm gameForm2;
+        GameForm gameForm3;
+
+
         public MainMenuForm()
         {
             InitializeComponent();
@@ -19,13 +17,18 @@ namespace BlackJack
 
         private void Btn_newGame_Click(object sender, EventArgs e)
         {
-            // Show the game form
-            using (GameForm gameForm = new GameForm())
-            {
-                Hide();
-                gameForm.ShowDialog();
-                Show();
-            }
+
+            gameForm1 = new GameForm();
+            gameForm2 = new GameForm();
+            gameForm3 = new GameForm();
+
+            /// Hide();
+
+            gameForm1.Show();
+            gameForm2.Show();
+            gameForm3.Show();
+            /// Show();
+
         }
 
         private void Btn_exit_Click(object sender, EventArgs e)

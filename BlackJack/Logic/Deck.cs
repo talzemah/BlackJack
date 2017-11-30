@@ -27,7 +27,7 @@ namespace BlackJack.Logic
         }
 
         // Draws one card and removes it from the deck
-        public Card Draw()
+        public Card DrawCard()
         {
             Card card = cards[0];
             cards.RemoveAt(0);

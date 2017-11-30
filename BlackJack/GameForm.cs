@@ -9,6 +9,8 @@ namespace BlackJack
 {
     public partial class GameForm : Form
     {
+        NewPlayerForm newPlayerForm;
+
         //Creates a new blackjack game with one player and an inital balance set through the settings designer
         private BlackJackGame game = new BlackJackGame(Properties.Settings.Default.InitBalance);
         private PictureBox[] player_1Cards;
@@ -22,7 +24,19 @@ namespace BlackJack
             LoadPictureBox();
             Foo();
             SetUpNewGame();
+
+            newPlayerForm = new NewPlayerForm();
+            newPlayerForm.AddNameEvent += UpdatePlayerName;
+            Hide();
+            newPlayerForm.ShowDialog();
+            Show();
         }
+
+        private void UpdatePlayerName(object sender, NameEventArgs e)
+        {
+            Lbl_p1_name.Text = e.PlayerName;
+        }
+
 
         // Load the picture box for each hand
         private void LoadPictureBox()
@@ -36,7 +50,7 @@ namespace BlackJack
         {
             Lbl_p1_name.Show();
             Lbl_p1_totalSum.Show();
-            Lbl_p1_name.Text = Properties.Settings.Default.Player_1Name;
+            Lbl_p1_name.Text = Properties.Settings.Default.PlayerName;
 
             Btn_stand.Enabled = false;
             Btn_hit.Enabled = false;
@@ -257,7 +271,6 @@ namespace BlackJack
                 if (!c.IsCardUp)
                     image.Replace(image.ToString(), Properties.Settings.Default.CardImageSkinPath);
 
-                ///pb.Image = new Bitmap(image.ToString());
                 pb.BackgroundImage = new Bitmap(image.ToString());
             }
             catch (ArgumentOutOfRangeException)

@@ -29,7 +29,7 @@ namespace BlackJack.Logic
         public Player(int newBalance)
         {
             // Sets the player's name that is displayed in the UI.
-            this.name = Properties.Settings.Default.Player_1Name;
+            this.name = Properties.Settings.Default.PlayerName;
             this.hand = new BlackJackHand();
             this.balance = newBalance;
         }
@@ -95,7 +95,7 @@ namespace BlackJack.Logic
         // Draw a card from the deck and add it to the hand
         public void Hit()
         {
-            Card tempCard = currentDeck.Draw();
+            Card tempCard = currentDeck.DrawCard();
             hand.Cards.Add(tempCard);
         }
 
