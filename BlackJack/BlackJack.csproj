@@ -45,7 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CreateNameEvent.cs" />
+    <Compile Include="EventHelper.cs" />
     <Compile Include="GameForm.cs">
       <SubType>Form</SubType>
     </Compile>

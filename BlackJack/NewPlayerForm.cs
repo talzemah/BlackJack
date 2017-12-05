@@ -22,14 +22,16 @@ namespace BlackJack
         private void Btn_ok_Click(object sender, EventArgs e)
         {
             String playerName = Tb_name.Text;
+
             if (String.IsNullOrEmpty(playerName))
             {
                 MessageBox.Show("Your name can not be empty.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
-                NameEventArgs args = new NameEventArgs(Tb_name.Text);
+                NameEventArgs args = new NameEventArgs(playerName);
                 AddNameEvent(this, args);
+                //AddNameEvent.Invoke(this, args);
                 Close();
             }
         }

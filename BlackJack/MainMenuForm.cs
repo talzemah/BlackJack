@@ -21,9 +21,14 @@ namespace BlackJack
         private void Btn_newGame_Click(object sender, EventArgs e)
         {
 
-            gameForm1 = new GameForm(game);
-            gameForm2 = new GameForm(game);
-            gameForm3 = new GameForm(game);
+            gameForm1 = new GameForm(game, UpdateUINames);
+            //gameForm1.NewPlayerForm.AddNameEvent += UpdateUINames;
+
+            gameForm2 = new GameForm(game, UpdateUINames);
+            //gameForm2.NewPlayerForm.AddNameEvent += UpdateUINames;
+
+            gameForm3 = new GameForm(game, UpdateUINames);
+            //gameForm3.NewPlayerForm.AddNameEvent += UpdateUINames;
 
             /// Hide();
 
@@ -33,6 +38,16 @@ namespace BlackJack
 
             /// Show();
 
+        }
+
+        private void UpdateUINames(object sender, NameEventArgs e)
+        {
+            if (gameForm1 != null)
+                gameForm1.UpdatePlayersName();
+            if (gameForm2 != null)
+                gameForm2.UpdatePlayersName();
+            if (gameForm3 != null)
+                gameForm3.UpdatePlayersName();
         }
 
         private void Btn_exit_Click(object sender, EventArgs e)

@@ -10,7 +10,11 @@ namespace BlackJack.Logic
         private Player player_1;
         private Player player_2;
         private Player player_3;
+        private Player[] players = new Player[3];
+
         private Player currentPlayer;
+        private int activePlayer;
+        private int readyToDeal;
 
         // Public properties to return the current player, dealer, and current deck
         public Player Dealer { get { return dealer; } }
@@ -18,8 +22,11 @@ namespace BlackJack.Logic
         public Player Player_1 { get { return player_1; } }
         public Player Player_2 { get { return player_2; } }
         public Player Player_3 { get { return player_3; } }
-        public Player CurrentPlayer { get { return currentPlayer; } }
+        public Player[] Players { get { return players; } }
 
+        public Player CurrentPlayer { get { return currentPlayer; } }
+        public int ActivePlayer { get { return activePlayer; } set { activePlayer = value; } }
+        public int ReadyToDeal { get { return readyToDeal; } set { readyToDeal = value; } }
 
         // Constructor for BlackJack Game
         public BlackJackGame(int initBalance)
@@ -31,20 +38,27 @@ namespace BlackJack.Logic
             player_3 = new Player(initBalance);
 
             currentPlayer = Player_1;
+            activePlayer = 0;
+            readyToDeal = 0;
         }
 
         // Deals a new game. This is invoked through the Deal button in GameForm.cs
         public void DealNewGame()
         {
+            // Reset readyToDeal var
+            readyToDeal = 0;
+
             // Create a new deck and then shuffle the deck
             deck = new Deck();
             deck.Shuffle();
 
             // Reset the player and the dealer's hands in case this is not the first game
+            dealer.NewHand();
+
             player_1.NewHand();
             player_2.NewHand();
             player_3.NewHand();
-            dealer.NewHand();
+            
 
             // Deal two cards to each person's hand
             for (int i = 0; i < 2; i++)
@@ -108,6 +122,13 @@ namespace BlackJack.Logic
         public void PlayerWin(Player p)
         {
             p.Balance += p.Bet * 2;
+        }
+
+        public void PlaceBet()
+        {
+            Player_1.PlaceBet();
+            Player_2.PlaceBet();
+            Player_3.PlaceBet();
         }
     }
 }

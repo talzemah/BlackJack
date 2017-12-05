@@ -15,10 +15,7 @@ namespace BlackJack
             PlayerName = newName;
         }
 
-        public String PlayerName
-        {
-            get; set;
-        }
+        public String PlayerName { get; set; }
     }
 
 
