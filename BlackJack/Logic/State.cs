@@ -6,4 +6,8 @@
         DealerBlackJack, PlayerBlackJack, PlayerBust, DealerBust, Push, PlayerWin, DealerWin
     }
 
+    public enum PlayerStatus
+    {
+        FirstTurn, BlackJack, Bust, Push, Win, Lose
+    }
 }

@@ -1,26 +1,39 @@
-﻿namespace BlackJack.Logic
+﻿using System;
+
+namespace BlackJack.Logic
 {
     public class BlackJackGame
-    {
-        // private Deck and Player objects for the current deck, dealer, and player
+    {   
+        // Private Deck and Player objects for the current deck, dealer, and player
         private Deck deck;
         private Player dealer;
-        private Player player;
+        private Player player_1;
+        private Player player_2;
+        private Player player_3;
+        private Player currentPlayer;
 
-        // public properties to return the current player, dealer, and current deck
-        public Player CurrentPlayer { get { return player; } }
+        // Public properties to return the current player, dealer, and current deck
         public Player Dealer { get { return dealer; } }
         public Deck CurrentDeck { get { return deck; } }
+        public Player Player_1 { get { return player_1; } }
+        public Player Player_2 { get { return player_2; } }
+        public Player Player_3 { get { return player_3; } }
+        public Player CurrentPlayer { get { return currentPlayer; } }
+
 
         // Constructor for BlackJack Game
         public BlackJackGame(int initBalance)
         {
             // Create a dealer and one player with the initial balance.
             dealer = new Player();
-            player = new Player(initBalance);
+            player_1 = new Player(initBalance);
+            player_2 = new Player(initBalance);
+            player_3 = new Player(initBalance);
+
+            currentPlayer = Player_1;
         }
 
-        // Deals a new game.  This is invoked through the Deal button in GameForm.cs
+        // Deals a new game. This is invoked through the Deal button in GameForm.cs
         public void DealNewGame()
         {
             // Create a new deck and then shuffle the deck
@@ -28,14 +41,22 @@
             deck.Shuffle();
 
             // Reset the player and the dealer's hands in case this is not the first game
-            player.NewHand();
+            player_1.NewHand();
+            player_2.NewHand();
+            player_3.NewHand();
             dealer.NewHand();
 
             // Deal two cards to each person's hand
             for (int i = 0; i < 2; i++)
             {
                 Card tempCard = deck.DrawCard();
-                player.Hand.Cards.Add(tempCard);
+                player_1.Hand.Cards.Add(tempCard);
+
+                tempCard = deck.DrawCard();
+                player_2.Hand.Cards.Add(tempCard);
+
+                tempCard = deck.DrawCard();
+                player_3.Hand.Cards.Add(tempCard);
 
                 tempCard = deck.DrawCard();
                 // Set the dealer's second card to be facing down
@@ -46,8 +67,26 @@
             }
 
             // Give the player and the dealer a handle to the current deck
-            player.CurrentDeck = deck;
+            player_1.CurrentDeck = deck;
+            player_2.CurrentDeck = deck;
+            player_3.CurrentDeck = deck;
             dealer.CurrentDeck = deck;
+        }
+
+        public void NextPlayer()
+        {
+            if (currentPlayer == Player_1)
+            {
+                currentPlayer = Player_2;
+            }
+            else if (currentPlayer == Player_2)
+            {
+                currentPlayer = Player_3;
+            }
+            else
+            {
+                currentPlayer = Player_1;
+            }
         }
 
         // This method finishes playing the dealer's hand
@@ -66,9 +105,9 @@
         }
 
         // Update player's win
-        public void PlayerWin()
+        public void PlayerWin(Player p)
         {
-            player.Balance += player.Bet * 2;
+            p.Balance += p.Bet * 2;
         }
     }
 }

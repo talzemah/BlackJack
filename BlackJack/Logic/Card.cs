@@ -22,7 +22,6 @@ namespace BlackJack.Logic
         public CardValue CardValue { get { return cardValue; } }
         public bool IsCardUp { get { return isCardUp; } set { isCardUp = value; } }
 
-
         // Constructor
         public Card(CardType cardType, CardValue cardValue, bool isCardUp)
         {
@@ -31,10 +30,5 @@ namespace BlackJack.Logic
             this.isCardUp = isCardUp;
         }
 
-        /// Return the card as a string (i.e. "The Ace of Spades")
-        //public override string ToString()
-        //{
-        //    return "The" + cardValue.ToString() + "of" + cardType.ToString();
-        //}
     }
 }

@@ -11,6 +11,8 @@ namespace BlackJack.Logic
         private decimal bet;
         private string name;
         private Deck currentDeck;
+        private PlayerStatus playerStatus;
+        private bool isFirstTurn;
 
         // Creates a list of cards
         private List<Card> cards = new List<Card>();
@@ -20,7 +22,8 @@ namespace BlackJack.Logic
         public string Name { get { return name; } set { name = value; } }
         public decimal Bet { get { return bet; } set { bet = value; } }
         public decimal Balance { get { return balance; } set { balance = value; } }
-
+        public PlayerStatus PlayerStatus { get { return playerStatus; } set { playerStatus = value; } }
+        public bool IsFirstTurn { get { return isFirstTurn; } set { isFirstTurn = value; } }
 
         // Creates a player with a default balance account (i.e. it doesn't matter what the dealer's balance is)
         public Player() : this(-1) { }
@@ -29,9 +32,10 @@ namespace BlackJack.Logic
         public Player(int newBalance)
         {
             // Sets the player's name that is displayed in the UI.
-            this.name = Properties.Settings.Default.PlayerName;
             this.hand = new BlackJackHand();
             this.balance = newBalance;
+            this.playerStatus = PlayerStatus.FirstTurn;
+            this.isFirstTurn = true;
         }
 
         // Increases the bet amount each time a bet is added to the hand
@@ -67,6 +71,7 @@ namespace BlackJack.Logic
         // Reset the hand
         public void NewHand()
         {
+            this.isFirstTurn = true;
             this.hand = new BlackJackHand();
         }
 

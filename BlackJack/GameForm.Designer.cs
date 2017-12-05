@@ -81,6 +81,13 @@
             this.Lbl_dealer_cardsSum = new System.Windows.Forms.Label();
             this.Btn_double = new System.Windows.Forms.Button();
             this.Tb_status = new System.Windows.Forms.TextBox();
+            this.Pb_P1_7 = new System.Windows.Forms.PictureBox();
+            this.Pb_P1_8 = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.Pb_P2_7 = new System.Windows.Forms.PictureBox();
+            this.Pb_P2_8 = new System.Windows.Forms.PictureBox();
+            this.Pb_P3_7 = new System.Windows.Forms.PictureBox();
+            this.Pb_P3_8 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.Pb_cardsDeck1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Pb_cardsDeck2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Pb_cardsDeck3)).BeginInit();
@@ -108,6 +115,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.Pb_P3_3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Pb_P3_2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Pb_P3_1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Pb_P1_7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Pb_P1_8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Pb_P2_7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Pb_P2_8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Pb_P3_7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Pb_P3_8)).BeginInit();
             this.SuspendLayout();
             // 
             // Btn_hit
@@ -618,38 +632,38 @@
             this.Lbl_p3_name.TabIndex = 45;
             this.Lbl_p3_name.Text = "Player 3:";
             // 
-            // Lbl_p1_totalCards
+            // Lbl_p1_cardsSum
             // 
             this.Lbl_p1_cardsSum.AutoSize = true;
             this.Lbl_p1_cardsSum.Location = new System.Drawing.Point(76, 170);
-            this.Lbl_p1_cardsSum.Name = "Lbl_p1_totalCards";
+            this.Lbl_p1_cardsSum.Name = "Lbl_p1_cardsSum";
             this.Lbl_p1_cardsSum.Size = new System.Drawing.Size(24, 17);
             this.Lbl_p1_cardsSum.TabIndex = 47;
             this.Lbl_p1_cardsSum.Text = "00";
             // 
-            // Lbl_p2_totalCards
+            // Lbl_p2_cardsSum
             // 
             this.Lbl_p2_cardsSum.AutoSize = true;
             this.Lbl_p2_cardsSum.Location = new System.Drawing.Point(464, 318);
-            this.Lbl_p2_cardsSum.Name = "Lbl_p2_totalCards";
+            this.Lbl_p2_cardsSum.Name = "Lbl_p2_cardsSum";
             this.Lbl_p2_cardsSum.Size = new System.Drawing.Size(24, 17);
             this.Lbl_p2_cardsSum.TabIndex = 48;
             this.Lbl_p2_cardsSum.Text = "00";
             // 
-            // Lbl_p3_totalCards
+            // Lbl_p3_cardsSum
             // 
             this.Lbl_p3_cardsSum.AutoSize = true;
             this.Lbl_p3_cardsSum.Location = new System.Drawing.Point(884, 173);
-            this.Lbl_p3_cardsSum.Name = "Lbl_p3_totalCards";
+            this.Lbl_p3_cardsSum.Name = "Lbl_p3_cardsSum";
             this.Lbl_p3_cardsSum.Size = new System.Drawing.Size(24, 17);
             this.Lbl_p3_cardsSum.TabIndex = 49;
             this.Lbl_p3_cardsSum.Text = "00";
             // 
-            // Lbl_dealer_totalCards
+            // Lbl_dealer_cardsSum
             // 
             this.Lbl_dealer_cardsSum.AutoSize = true;
             this.Lbl_dealer_cardsSum.Location = new System.Drawing.Point(465, 123);
-            this.Lbl_dealer_cardsSum.Name = "Lbl_dealer_totalCards";
+            this.Lbl_dealer_cardsSum.Name = "Lbl_dealer_cardsSum";
             this.Lbl_dealer_cardsSum.Size = new System.Drawing.Size(24, 17);
             this.Lbl_dealer_cardsSum.TabIndex = 50;
             this.Lbl_dealer_cardsSum.Text = "00";
@@ -664,16 +678,86 @@
             this.Btn_double.UseVisualStyleBackColor = true;
             this.Btn_double.Click += new System.EventHandler(this.Btn_double_Click);
             // 
-            // gameOverTextBox
+            // Tb_status
             // 
             this.Tb_status.BackColor = System.Drawing.Color.White;
             this.Tb_status.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.Tb_status.Location = new System.Drawing.Point(81, 13);
-            this.Tb_status.Name = "gameOverTextBox";
+            this.Tb_status.Name = "Tb_status";
             this.Tb_status.ReadOnly = true;
             this.Tb_status.Size = new System.Drawing.Size(300, 30);
             this.Tb_status.TabIndex = 52;
             this.Tb_status.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // Pb_P1_7
+            // 
+            this.Pb_P1_7.BackColor = System.Drawing.Color.Transparent;
+            this.Pb_P1_7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.Pb_P1_7.Location = new System.Drawing.Point(234, 145);
+            this.Pb_P1_7.Name = "Pb_P1_7";
+            this.Pb_P1_7.Size = new System.Drawing.Size(93, 130);
+            this.Pb_P1_7.TabIndex = 53;
+            this.Pb_P1_7.TabStop = false;
+            // 
+            // Pb_P1_8
+            // 
+            this.Pb_P1_8.BackColor = System.Drawing.Color.Transparent;
+            this.Pb_P1_8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.Pb_P1_8.Location = new System.Drawing.Point(254, 145);
+            this.Pb_P1_8.Name = "Pb_P1_8";
+            this.Pb_P1_8.Size = new System.Drawing.Size(93, 130);
+            this.Pb_P1_8.TabIndex = 54;
+            this.Pb_P1_8.TabStop = false;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox1.Location = new System.Drawing.Point(273, 145);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(93, 130);
+            this.pictureBox1.TabIndex = 55;
+            this.pictureBox1.TabStop = false;
+            // 
+            // Pb_P2_7
+            // 
+            this.Pb_P2_7.BackColor = System.Drawing.Color.Transparent;
+            this.Pb_P2_7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.Pb_P2_7.Location = new System.Drawing.Point(620, 290);
+            this.Pb_P2_7.Name = "Pb_P2_7";
+            this.Pb_P2_7.Size = new System.Drawing.Size(93, 130);
+            this.Pb_P2_7.TabIndex = 56;
+            this.Pb_P2_7.TabStop = false;
+            // 
+            // Pb_P2_8
+            // 
+            this.Pb_P2_8.BackColor = System.Drawing.Color.Transparent;
+            this.Pb_P2_8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.Pb_P2_8.Location = new System.Drawing.Point(640, 290);
+            this.Pb_P2_8.Name = "Pb_P2_8";
+            this.Pb_P2_8.Size = new System.Drawing.Size(93, 130);
+            this.Pb_P2_8.TabIndex = 57;
+            this.Pb_P2_8.TabStop = false;
+            // 
+            // Pb_P3_7
+            // 
+            this.Pb_P3_7.BackColor = System.Drawing.Color.Transparent;
+            this.Pb_P3_7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.Pb_P3_7.Location = new System.Drawing.Point(1039, 145);
+            this.Pb_P3_7.Name = "Pb_P3_7";
+            this.Pb_P3_7.Size = new System.Drawing.Size(93, 130);
+            this.Pb_P3_7.TabIndex = 58;
+            this.Pb_P3_7.TabStop = false;
+            // 
+            // Pb_P3_8
+            // 
+            this.Pb_P3_8.BackColor = System.Drawing.Color.Transparent;
+            this.Pb_P3_8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.Pb_P3_8.Location = new System.Drawing.Point(1059, 145);
+            this.Pb_P3_8.Name = "Pb_P3_8";
+            this.Pb_P3_8.Size = new System.Drawing.Size(93, 130);
+            this.Pb_P3_8.TabIndex = 59;
+            this.Pb_P3_8.TabStop = false;
             // 
             // GameForm
             // 
@@ -682,6 +766,13 @@
             this.BackgroundImage = global::BlackJack.Properties.Resources.tableBackground;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1182, 673);
+            this.Controls.Add(this.Pb_P3_8);
+            this.Controls.Add(this.Pb_P3_7);
+            this.Controls.Add(this.Pb_P2_8);
+            this.Controls.Add(this.Pb_P2_7);
+            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.Pb_P1_8);
+            this.Controls.Add(this.Pb_P1_7);
             this.Controls.Add(this.Tb_status);
             this.Controls.Add(this.Btn_double);
             this.Controls.Add(this.Lbl_dealer_cardsSum);
@@ -738,7 +829,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "GameForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "GameForm";
             ((System.ComponentModel.ISupportInitialize)(this.Pb_cardsDeck1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Pb_cardsDeck2)).EndInit();
@@ -767,6 +858,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.Pb_P3_3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Pb_P3_2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Pb_P3_1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Pb_P1_7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Pb_P1_8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Pb_P2_7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Pb_P2_8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Pb_P3_7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Pb_P3_8)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -827,5 +925,12 @@
         private System.Windows.Forms.Label Lbl_dealer_cardsSum;
         private System.Windows.Forms.Button Btn_double;
         private System.Windows.Forms.TextBox Tb_status;
+        private System.Windows.Forms.PictureBox Pb_P1_7;
+        private System.Windows.Forms.PictureBox Pb_P1_8;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox Pb_P2_7;
+        private System.Windows.Forms.PictureBox Pb_P2_8;
+        private System.Windows.Forms.PictureBox Pb_P3_7;
+        private System.Windows.Forms.PictureBox Pb_P3_8;
     }
 }
