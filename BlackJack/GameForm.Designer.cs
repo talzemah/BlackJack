@@ -32,7 +32,7 @@
             this.Btn_stand = new System.Windows.Forms.Button();
             this.Btn_deal = new System.Windows.Forms.Button();
             this.Btn_10 = new System.Windows.Forms.Button();
-            this.btn_25 = new System.Windows.Forms.Button();
+            this.Btn_25 = new System.Windows.Forms.Button();
             this.Btn_50 = new System.Windows.Forms.Button();
             this.Btn_100 = new System.Windows.Forms.Button();
             this.Lbl_myBet = new System.Windows.Forms.Label();
@@ -174,21 +174,21 @@
             this.Btn_10.UseVisualStyleBackColor = false;
             this.Btn_10.Click += new System.EventHandler(this.Btn_10_Click);
             // 
-            // btn_25
+            // Btn_25
             // 
-            this.btn_25.BackColor = System.Drawing.Color.Transparent;
-            this.btn_25.BackgroundImage = global::BlackJack.Properties.Resources.chip25;
-            this.btn_25.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btn_25.FlatAppearance.BorderSize = 0;
-            this.btn_25.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btn_25.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btn_25.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_25.Location = new System.Drawing.Point(378, 591);
-            this.btn_25.Name = "btn_25";
-            this.btn_25.Size = new System.Drawing.Size(70, 70);
-            this.btn_25.TabIndex = 4;
-            this.btn_25.UseVisualStyleBackColor = false;
-            this.btn_25.Click += new System.EventHandler(this.btn_25_Click);
+            this.Btn_25.BackColor = System.Drawing.Color.Transparent;
+            this.Btn_25.BackgroundImage = global::BlackJack.Properties.Resources.chip25;
+            this.Btn_25.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.Btn_25.FlatAppearance.BorderSize = 0;
+            this.Btn_25.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.Btn_25.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.Btn_25.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Btn_25.Location = new System.Drawing.Point(378, 591);
+            this.Btn_25.Name = "Btn_25";
+            this.Btn_25.Size = new System.Drawing.Size(70, 70);
+            this.Btn_25.TabIndex = 4;
+            this.Btn_25.UseVisualStyleBackColor = false;
+            this.Btn_25.Click += new System.EventHandler(this.btn_25_Click);
             // 
             // Btn_50
             // 
@@ -847,7 +847,7 @@
             this.Controls.Add(this.Lbl_myBet);
             this.Controls.Add(this.Btn_100);
             this.Controls.Add(this.Btn_50);
-            this.Controls.Add(this.btn_25);
+            this.Controls.Add(this.Btn_25);
             this.Controls.Add(this.Btn_10);
             this.Controls.Add(this.Btn_deal);
             this.Controls.Add(this.Btn_stand);
@@ -904,7 +904,7 @@
         private System.Windows.Forms.Button Btn_stand;
         private System.Windows.Forms.Button Btn_deal;
         private System.Windows.Forms.Button Btn_10;
-        private System.Windows.Forms.Button btn_25;
+        private System.Windows.Forms.Button Btn_25;
         private System.Windows.Forms.Button Btn_50;
         private System.Windows.Forms.Button Btn_100;
         private System.Windows.Forms.Label Lbl_myBet;

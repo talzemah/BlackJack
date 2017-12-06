@@ -6,13 +6,11 @@ namespace BlackJack
 {
     public partial class MainMenuForm : Form
     {
-        private BlackJackGame game = new BlackJackGame(Properties.Settings.Default.InitBalance);
+        private BlackJackGame game;
+        private GameForm[] gameForms = new GameForm[3];
+        private GameForm currentForm;
 
-        GameForm gameForm1;
-        GameForm gameForm2;
-        GameForm gameForm3;
-
-
+        // Constractor.
         public MainMenuForm()
         {
             InitializeComponent();
@@ -20,34 +18,91 @@ namespace BlackJack
 
         private void Btn_newGame_Click(object sender, EventArgs e)
         {
+            game = new BlackJackGame(Properties.Settings.Default.InitBalance);
+            game.DealEvent += UpdateUIAfterDeal;
+            game.PlayerFinishEvent += CurrentPlayerFinishToPlay;
 
-            gameForm1 = new GameForm(game, UpdateUINames);
-            //gameForm1.NewPlayerForm.AddNameEvent += UpdateUINames;
+            for (int i = 0; i < gameForms.Length; i++)
+            {
+                gameForms[i] = new GameForm(game, UpdateUINames);
+                gameForms[i].Show();
+            }
+        }
 
-            gameForm2 = new GameForm(game, UpdateUINames);
-            //gameForm2.NewPlayerForm.AddNameEvent += UpdateUINames;
+        private void CurrentPlayerFinishToPlay(object sender, EventArgs e)
+        {
+            currentForm.UpdateButtonsFinishPlay();
 
-            gameForm3 = new GameForm(game, UpdateUINames);
-            //gameForm3.NewPlayerForm.AddNameEvent += UpdateUINames;
+            game.NextPlayer();
+            if (UpdateCurrentForm())
+            {
+                currentForm.UpdateButtonsToPlay();
+            }
+            else
+            {
+                // All players are finish to play.
+                game.DealerPlay();
+                UpdateUIAfterDeal(this, new EventArgs());
 
-            /// Hide();
+                ///EndGame();
+                //game.SelectFirstPlayer();
+                //UpdateCurrentForm();
+                //currentForm.EndGame(currentForm.GetGameResult());
+            }
+            
 
-            gameForm1.Show();
-            gameForm2.Show();
-            gameForm3.Show();
+        }
 
-            /// Show();
+        private void EndGame()
+        {
+            for (int i = 0; i < gameForms.Length; i++)
+            {
+                if (gameForms[i] != null)
+                {
+                    gameForms[i].EndGame(gameForms[i].GetGameResult());
+                    System.Threading.Thread.Sleep(1000);
+                }
+            }
+        }
 
+        private void UpdateUIAfterDeal(object sender, EventArgs e)
+        {
+            for (int i = 0; i < gameForms.Length; i++)
+            {
+                if (gameForms[i] != null)
+                {
+                    gameForms[i].UpdateUICards();
+                    gameForms[i].UpdateBalanceAndBetValue();
+                }
+            }
+
+            UpdateCurrentForm();
+            currentForm.UpdateButtonsToPlay();
+            
+        }
+
+        private bool UpdateCurrentForm()
+        {
+            GameForm temp = currentForm;
+            for (int i = 0; i < game.Players.Length; i++)
+            {
+                if (game.Players[i] == game.CurrentPlayer)
+                {
+                    currentForm = gameForms[i];
+                }
+            }
+            return temp != currentForm;
         }
 
         private void UpdateUINames(object sender, NameEventArgs e)
         {
-            if (gameForm1 != null)
-                gameForm1.UpdatePlayersName();
-            if (gameForm2 != null)
-                gameForm2.UpdatePlayersName();
-            if (gameForm3 != null)
-                gameForm3.UpdatePlayersName();
+            for (int i = 0; i < gameForms.Length; i++)
+            {
+                if (gameForms[i] != null)
+                {
+                    gameForms[i].UpdatePlayersName();
+                }
+            }
         }
 
         private void Btn_exit_Click(object sender, EventArgs e)

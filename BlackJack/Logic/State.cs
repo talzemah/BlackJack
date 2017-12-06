@@ -8,6 +8,6 @@
 
     public enum PlayerStatus
     {
-        FirstTurn, BlackJack, Bust, Push, Win, Lose
+        FirstTurn, BlackJack, Bust, Push, Win, Lose, FinishPlay
     }
 }
