@@ -104,7 +104,7 @@ namespace BlackJack
                 //UpdateCurrentForm();
                 //currentForm.EndGame(currentForm.GetGameResult());
             }
-            
+
 
         }
 
@@ -115,7 +115,10 @@ namespace BlackJack
                 if (gameForms[i] != null)
                 {
                     gameForms[i].EndGame(gameForms[i].GetGameResult());
-                    gameForms[i].UpdateBalanceAndBetValue();
+
+                    // In case this object = null from previous row.
+                    if (gameForms[i] != null)
+                        gameForms[i].UpdateBalanceAndBetValue();
                 }
             }
         }
@@ -133,7 +136,7 @@ namespace BlackJack
 
             UpdateCurrentForm();
             currentForm.UpdateButtonsToPlay();
-            
+
         }
 
         private bool UpdateCurrentForm()
