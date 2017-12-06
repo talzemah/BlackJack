@@ -21,11 +21,24 @@ namespace BlackJack
             game = new BlackJackGame(Properties.Settings.Default.InitBalance);
             game.DealEvent += UpdateUIAfterDeal;
             game.PlayerFinishEvent += CurrentPlayerFinishToPlay;
+            game.PlayerEndEvent += CurrentPlayerEndGame;
 
             for (int i = 0; i < gameForms.Length; i++)
             {
                 gameForms[i] = new GameForm(game, UpdateUINames);
                 gameForms[i].Show();
+            }
+        }
+
+        private void CurrentPlayerEndGame(object sender, EndEventArgs e)
+        {
+            for (int i = 0; i < gameForms.Length; i++)
+            {
+                if (gameForms[i] != null)
+                {
+                    gameForms[i].UpdateEndRes(e.Res);
+                    gameForms[i].UpdateBalanceAndBetValue();
+                }
             }
         }
 
@@ -44,7 +57,8 @@ namespace BlackJack
                 game.DealerPlay();
                 UpdateUIAfterDeal(this, new EventArgs());
 
-                ///EndGame();
+                EndGame();
+
                 //game.SelectFirstPlayer();
                 //UpdateCurrentForm();
                 //currentForm.EndGame(currentForm.GetGameResult());
@@ -60,7 +74,7 @@ namespace BlackJack
                 if (gameForms[i] != null)
                 {
                     gameForms[i].EndGame(gameForms[i].GetGameResult());
-                    System.Threading.Thread.Sleep(1000);
+                    gameForms[i].UpdateBalanceAndBetValue();
                 }
             }
         }

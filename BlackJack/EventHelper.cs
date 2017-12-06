@@ -19,11 +19,23 @@ namespace BlackJack
         public String PlayerName { get; set; }
     }
 
-    // new deal event
+    // Deal event
     public delegate void DealEventHandler(object sender, EventArgs e);
 
     // Player has finish to play event
     public delegate void PlayerFinishToPlayEventHandler(object sender, EventArgs e);
 
+    // Player has End game event
+    public delegate void PlayerEndPlayEventHandler(object sender, EndEventArgs e);
+
+    public class EndEventArgs : EventArgs
+    {
+        public EndEventArgs(String res)
+        {
+            Res = res;
+        }
+
+        public String Res { get; set; }
+    }
 
 }

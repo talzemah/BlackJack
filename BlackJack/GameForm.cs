@@ -42,6 +42,11 @@ namespace BlackJack
             Show();
         }
 
+        public void UpdateEndRes(String res)
+        {
+            Tb_status.AppendText(res + "\n");
+        }
+
         internal void UpdateButtonsFinishPlay()
         {
             Btn_double.Enabled = false;
@@ -263,6 +268,13 @@ namespace BlackJack
         // Refresh the UI to show appropriate cards
         public void UpdateUICards()
         {
+            // Reset all cards on table.
+            ClearCardsOnTable();
+
+            // Reset and hide textBox status
+            Tb_status.Hide();
+            Tb_status.ResetText();
+
             // Update the value of the dealer hand
             Lbl_dealer_cardsSum.Show();
             Lbl_dealer_cardsSum.Text = game.Dealer.Hand.GetSumOfHand().ToString();
@@ -401,40 +413,51 @@ namespace BlackJack
         // Takes an EndResult value and shows the resulting game ending in the UI
         public void EndGame(EndResult endState)
         {
+            String res = refPlayer.Name + ": ";
+
             switch (endState)
             {
                 case EndResult.DealerBust:
-                    Tb_status.Text = "Dealer Bust!";
+                    res += "Dealer Bust!";
+                    //Tb_status.Text = "Dealer Bust!";
                     game.PlayerWin(refPlayer);
                     break;
 
                 case EndResult.DealerBlackJack:
-                    Tb_status.Text = "Dealer BlackJack!";
+                    res += "Dealer BlackJack!";
+                    //Tb_status.Text = "Dealer BlackJack!";
                     break;
 
                 case EndResult.DealerWin:
-                    Tb_status.Text = "Dealer Won!";
+                    res += "Dealer Won!";
+                    //Tb_status.Text = "Dealer Won!";
                     break;
 
                 case EndResult.PlayerBlackJack:
-                    Tb_status.Text = refPlayer.Name + " BlackJack!";
+                    res += "Player BlackJack!";
+                    //Tb_status.Text = refPlayer.Name + " BlackJack!";
                     refPlayer.Balance += (refPlayer.Bet * (decimal)2.5);
                     break;
 
                 case EndResult.PlayerBust:
-                    Tb_status.Text = refPlayer.Name + " Bust!";
+                    res += "Player Bust!";
+                    //Tb_status.Text = refPlayer.Name + " Bust!";
                     break;
 
                 case EndResult.PlayerWin:
-                    Tb_status.Text = refPlayer.Name + " Won!";
+                    res += "Player Won!";
+                    //Tb_status.Text = refPlayer.Name + " Won!";
                     game.PlayerWin(refPlayer);
                     break;
 
                 case EndResult.Push:
-                    Tb_status.Text = refPlayer.Name + " Push";
+                    res += "Push";
+                    //Tb_status.Text = refPlayer.Name + " Push";
                     refPlayer.Balance += refPlayer.Bet;
                     break;
             }
+
+            game.PlayerEndGame(res);
 
             SetUpNewGame();
             UpdateBalanceAndBetValue();

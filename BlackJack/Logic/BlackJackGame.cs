@@ -23,6 +23,8 @@ namespace BlackJack.Logic
         // Events.
         public event DealEventHandler DealEvent;
         public event PlayerFinishToPlayEventHandler PlayerFinishEvent;
+        public event PlayerEndPlayEventHandler PlayerEndEvent;
+
 
         // Constructor for BlackJack Game
         public BlackJackGame(int initBalance)
@@ -55,6 +57,9 @@ namespace BlackJack.Logic
         // Deals a new game. This is invoked through the Deal button in GameForm.cs
         public void DealNewGame()
         {
+            // Is first player Turn again.
+            SelectFirstPlayer();
+
             // Reset readyToDeal var
             readyToDeal = 0;
 
@@ -162,6 +167,12 @@ namespace BlackJack.Logic
         public void CurrentPlayerFinishToPlay()
         {
             PlayerFinishEvent(this, new EventArgs());
+        }
+
+        public void PlayerEndGame(String res)
+        {
+            EndEventArgs args = new EndEventArgs(res);
+            PlayerEndEvent(this, args);
         }
     }
 }

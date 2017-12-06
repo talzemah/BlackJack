@@ -685,11 +685,12 @@
             // Tb_status
             // 
             this.Tb_status.BackColor = System.Drawing.Color.White;
-            this.Tb_status.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.Tb_status.Location = new System.Drawing.Point(81, 13);
+            this.Tb_status.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.Tb_status.Location = new System.Drawing.Point(88, 7);
+            this.Tb_status.Multiline = true;
             this.Tb_status.Name = "Tb_status";
             this.Tb_status.ReadOnly = true;
-            this.Tb_status.Size = new System.Drawing.Size(300, 30);
+            this.Tb_status.Size = new System.Drawing.Size(300, 80);
             this.Tb_status.TabIndex = 52;
             this.Tb_status.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
