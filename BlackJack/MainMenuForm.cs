@@ -22,11 +22,52 @@ namespace BlackJack
             game.DealEvent += UpdateUIAfterDeal;
             game.PlayerFinishEvent += CurrentPlayerFinishToPlay;
             game.PlayerEndEvent += CurrentPlayerEndGame;
+            game.HitEvent += UpdateUIAfterHit;
+            game.GameCloseEvent += AnyGameClosed;
 
             for (int i = 0; i < gameForms.Length; i++)
             {
                 gameForms[i] = new GameForm(game, UpdateUINames);
                 gameForms[i].Show();
+            }
+        }
+
+        private void AnyGameClosed(object sender, EventArgs e)
+        {
+            int closedForm = -1;
+            for (int i = 0; i < gameForms.Length; i++)
+            {
+                if (gameForms[i] == sender)
+                {
+                    gameForms[i] = null;
+                    closedForm = i;
+                    break;
+                }
+            }
+
+            game.ActivePlayers--;
+            if (closedForm != -1)
+                game.Players[closedForm] = null;
+
+            for (int i = 0; i < gameForms.Length; i++)
+            {
+                if (gameForms[i] != null)
+                {
+                    gameForms[i].UpdatePlayersName();
+                    gameForms[i].UpdateBalanceAndBetValue();
+                    gameForms[i].UpdateUICards();
+                }
+            }
+        }
+
+        private void UpdateUIAfterHit(object sender, EventArgs e)
+        {
+            for (int i = 0; i < gameForms.Length; i++)
+            {
+                if (gameForms[i] != null)
+                {
+                    gameForms[i].UpdateUICards();
+                }
             }
         }
 

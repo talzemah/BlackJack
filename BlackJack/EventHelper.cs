@@ -38,4 +38,10 @@ namespace BlackJack
         public String Res { get; set; }
     }
 
+    // Hit event
+    public delegate void HitEventHandler(object sender, EventArgs e);
+
+    // Game close event
+    public delegate void GameCloseEventHandler(object sender, EventArgs e);
+
 }

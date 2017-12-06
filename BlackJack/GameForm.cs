@@ -40,6 +40,13 @@ namespace BlackJack
             Hide();
             newPlayerForm.ShowDialog();
             Show();
+
+            this.FormClosed += GameFormClosed;
+        }
+
+        private void GameFormClosed(object sender, FormClosedEventArgs e)
+        {
+            game.AnyPlayerClosed(this);
         }
 
         public void UpdateEndRes(String res)
@@ -90,9 +97,9 @@ namespace BlackJack
 
         public void UpdatePlayersName()
         {
-            Lbl_p1_name.Text = game.Players[0].Name;
-            Lbl_p2_name.Text = game.Players[1].Name;
-            Lbl_p3_name.Text = game.Players[2].Name;
+            Lbl_p1_name.Text = game.Players[0] != null ? game.Players[0].Name : "";
+            Lbl_p2_name.Text = game.Players[1] != null ? game.Players[1].Name : "";
+            Lbl_p3_name.Text = game.Players[2] != null ? game.Players[2].Name : "";
         }
 
         // Load the picture box for each hand
@@ -160,14 +167,17 @@ namespace BlackJack
             // Update the "My Account" value
             Tb_myBet.Text = "$" + (refPlayer != null ? refPlayer.Bet.ToString() : "0");
 
+
             Lbl_p1_totalSum.Show();
-            Lbl_p1_totalSum.Text = "$" + game.Players[0].Balance.ToString();
+            Lbl_p1_totalSum.Text = game.Players[0] != null ? "$" + game.Players[0].Balance.ToString() : "";
 
             Lbl_p2_totalSum.Show();
-            Lbl_p2_totalSum.Text = "$" + game.Players[1].Balance.ToString();
+            Lbl_p2_totalSum.Text = game.Players[1] != null ? "$" + game.Players[1].Balance.ToString() : "";
 
             Lbl_p3_totalSum.Show();
-            Lbl_p3_totalSum.Text = "$" + game.Players[2].Balance.ToString();
+            Lbl_p3_totalSum.Text = game.Players[2] != null ? "$" + game.Players[2].Balance.ToString() : "";
+
+
         }
 
         // Invoked when the deal button is clicked
@@ -193,16 +203,6 @@ namespace BlackJack
                     game.PlaceBets();
                     game.DealNewGame();
 
-                    // Clear the table, set up the UI for playing a game, and deal a new game
-                    //ClearCardsOnTable();
-                    //UpdateButtonsToPlay();
-                    //UpdateUICards();
-
-                    // Check see if the current player has blackjack
-                    if (refPlayer.HasBlackJack())
-                    {
-                        EndGame(EndResult.PlayerBlackJack);
-                    }
                 }
             }
             catch (Exception NotEnoughMoneyException)
@@ -260,9 +260,20 @@ namespace BlackJack
             Tb_status.Hide();
             Lbl_dealer_cardsSum.Show();
 
-            Lbl_p1_cardsSum.Show();
-            Lbl_p2_cardsSum.Show();
-            Lbl_p3_cardsSum.Show();
+            if (game.Players[0] != null)
+                Lbl_p1_cardsSum.Show();
+            else
+                Lbl_p1_cardsSum.Hide();
+
+            if (game.Players[1] != null)
+                Lbl_p2_cardsSum.Show();
+            else
+                Lbl_p2_cardsSum.Hide();
+
+            if (game.Players[2] != null)
+                Lbl_p3_cardsSum.Show();
+            else
+                Lbl_p3_cardsSum.Hide();
         }
 
         // Refresh the UI to show appropriate cards
@@ -288,43 +299,60 @@ namespace BlackJack
             }
 
             // Update the value of the player_1 hand
-            Lbl_p1_cardsSum.Show();
-            Lbl_p1_cardsSum.Text = game.Players[0].Hand.GetSumOfHand().ToString();
-
-            List<Card> p_1Cards = game.Players[0].Hand.Cards;
-            for (int i = 0; i < p_1Cards.Count; i++)
+            if (game.Players[0] != null)
             {
-                // Load each card from file
-                LoadCard(player_1Cards[i], p_1Cards[i]);
-                player_1Cards[i].Visible = true;
-                player_1Cards[i].BringToFront();
+                Lbl_p1_cardsSum.Show();
+                Lbl_p1_cardsSum.Text = game.Players[0].Hand.GetSumOfHand().ToString();
+
+                List<Card> p_1Cards = game.Players[0].Hand.Cards;
+                for (int i = 0; i < p_1Cards.Count; i++)
+                {
+                    // Load each card from file
+                    LoadCard(player_1Cards[i], p_1Cards[i]);
+                    player_1Cards[i].Visible = true;
+                    player_1Cards[i].BringToFront();
+                }
             }
+            else
+                Lbl_p1_cardsSum.Hide();
+
 
             // Update the value of the player_2 hand
-            Lbl_p2_cardsSum.Show();
-            Lbl_p2_cardsSum.Text = game.Players[1].Hand.GetSumOfHand().ToString();
-
-            List<Card> p_2Cards = game.Players[1].Hand.Cards;
-            for (int i = 0; i < p_2Cards.Count; i++)
+            if (game.Players[1] != null)
             {
-                // Load each card from file
-                LoadCard(player_2Cards[i], p_2Cards[i]);
-                player_2Cards[i].Visible = true;
-                player_2Cards[i].BringToFront();
+                Lbl_p2_cardsSum.Show();
+                Lbl_p2_cardsSum.Text = game.Players[1].Hand.GetSumOfHand().ToString();
+
+                List<Card> p_2Cards = game.Players[1].Hand.Cards;
+                for (int i = 0; i < p_2Cards.Count; i++)
+                {
+                    // Load each card from file
+                    LoadCard(player_2Cards[i], p_2Cards[i]);
+                    player_2Cards[i].Visible = true;
+                    player_2Cards[i].BringToFront();
+                }
             }
+            else
+                Lbl_p2_cardsSum.Hide();
 
             // Update the value of the player_3 hand
-            Lbl_p3_cardsSum.Show();
-            Lbl_p3_cardsSum.Text = game.Players[2].Hand.GetSumOfHand().ToString();
-
-            List<Card> p_3Cards = game.Players[2].Hand.Cards;
-            for (int i = 0; i < p_3Cards.Count; i++)
+            if (game.Players[2] != null)
             {
-                // Load each card from file
-                LoadCard(player_3Cards[i], p_3Cards[i]);
-                player_3Cards[i].Visible = true;
-                player_3Cards[i].BringToFront();
+                Lbl_p3_cardsSum.Show();
+                Lbl_p3_cardsSum.Text = game.Players[2].Hand.GetSumOfHand().ToString();
+
+                List<Card> p_3Cards = game.Players[2].Hand.Cards;
+                for (int i = 0; i < p_3Cards.Count; i++)
+                {
+                    // Load each card from file
+                    LoadCard(player_3Cards[i], p_3Cards[i]);
+                    player_3Cards[i].Visible = true;
+                    player_3Cards[i].BringToFront();
+                }
             }
+            else
+                Lbl_p3_cardsSum.Hide();
+
         }
 
         // Takes the card type and value and loads the corresponding card image
@@ -460,7 +488,6 @@ namespace BlackJack
             game.PlayerEndGame(res);
 
             SetUpNewGame();
-            UpdateBalanceAndBetValue();
             Tb_status.Show();
 
             // Check if the current player is out of money
@@ -525,13 +552,6 @@ namespace BlackJack
             refPlayer.PlayerStatus = PlayerStatus.FinishPlay;
             game.CurrentPlayerFinishToPlay();
 
-
-            //// Dealer should finish playing and the UI should be updated
-            //game.DealerPlay();
-            //UpdateUICards();
-
-            //// Check who won the game
-            //EndGame(GetGameResult());
         }
 
         // Get the game result, This returns an EndResult value
@@ -539,10 +559,22 @@ namespace BlackJack
         {
             EndResult endState;
 
-            // Check for blackjack
-            if (game.Dealer.Hand.NumCards == 2 && game.Dealer.HasBlackJack())
+            // Check if the player has bust
+            if (refPlayer.HasBust())
             {
-                endState = EndResult.DealerBlackJack;
+                endState = EndResult.PlayerBust;
+            }
+
+            // Check for dealer blackjack
+            else if (game.Dealer.HasBlackJack())
+            {
+                endState = refPlayer.HasBlackJack() ? EndResult.Push : EndResult.DealerBlackJack;
+            }
+
+            // Check for player blackjack
+            else if (refPlayer.HasBlackJack())
+            {
+                endState = game.Dealer.HasBlackJack() ? EndResult.Push : EndResult.PlayerBlackJack;
             }
 
             // Check if the dealer has bust
@@ -551,7 +583,7 @@ namespace BlackJack
                 endState = EndResult.DealerBust;
             }
 
-            // Check if the ealer wins
+            // Check if the dealer wins
             else if (game.Dealer.Hand.CompareHandsValue(refPlayer.Hand) > 0)
             {
                 endState = EndResult.DealerWin;
@@ -582,12 +614,16 @@ namespace BlackJack
 
             // Hit once and update UI cards
             refPlayer.Hit();
-            UpdateUICards();
+            game.UpdatePlayerHit();
+
+            ///UpdateUICards();
 
             // Check to see if player has bust
             if (refPlayer.HasBust())
             {
-                EndGame(EndResult.PlayerBust);
+                refPlayer.PlayerStatus = PlayerStatus.FinishPlay;
+                game.CurrentPlayerFinishToPlay();
+                //EndGame(EndResult.PlayerBust);
             }
         }
 
@@ -598,22 +634,25 @@ namespace BlackJack
             {
                 // Double the player's bet amount
                 refPlayer.DoubleBet();
-                UpdateUICards();
-                UpdateBalanceAndBetValue();
 
-                //Make sure that the player didn't bust
-                if (refPlayer.HasBust())
-                {
-                    EndGame(EndResult.PlayerBust);
-                }
+                // It is no longer the first turn, set this to false so that the cards will all be facing upwards
+                refPlayer.IsFirstTurn = false;
 
-                // Otherwise, let the dealer finish playing
-                else
-                {
-                    game.DealerPlay();
-                    UpdateUICards();
-                    EndGame(GetGameResult());
-                }
+                Btn_double.Enabled = false;
+
+                // Hit once and update UI cards
+                refPlayer.Hit();
+                game.UpdatePlayerHit();
+
+                //UpdateUICards();
+                //UpdateBalanceAndBetValue();
+
+
+                refPlayer.PlayerStatus = PlayerStatus.FinishPlay;
+                game.CurrentPlayerFinishToPlay();
+                //EndGame(EndResult.PlayerBust);
+
+
             }
             catch (Exception NotEnoughMoneyException)
             {
@@ -621,6 +660,9 @@ namespace BlackJack
             }
         }
 
+        private void GameForm_Load(object sender, EventArgs e)
+        {
 
+        }
     }
 }

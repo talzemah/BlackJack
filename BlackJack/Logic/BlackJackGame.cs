@@ -24,7 +24,8 @@ namespace BlackJack.Logic
         public event DealEventHandler DealEvent;
         public event PlayerFinishToPlayEventHandler PlayerFinishEvent;
         public event PlayerEndPlayEventHandler PlayerEndEvent;
-
+        public event HitEventHandler HitEvent;
+        public event GameCloseEventHandler GameCloseEvent;
 
         // Constructor for BlackJack Game
         public BlackJackGame(int initBalance)
@@ -40,6 +41,11 @@ namespace BlackJack.Logic
             currentPlayer = players[0];
             activePlayers = 0;
             readyToDeal = 0;
+        }
+
+        public void AnyPlayerClosed(Object sender)
+        {
+            GameCloseEvent(sender, new EventArgs());
         }
 
         public void SelectFirstPlayer()
@@ -117,17 +123,20 @@ namespace BlackJack.Logic
         {
             if (currentPlayer == players[0])
             {
-                currentPlayer = players[1];
+                currentPlayer = players[1] != null ? players[1] : players[2] != null ? players[2] : players[0];
             }
             else if (currentPlayer == players[1])
             {
-                currentPlayer = players[2];
+                currentPlayer = players[2] != null ? players[2] : players[0] != null ? players[0] : players[1];
+                ///currentPlayer = players[2];
             }
             else if (currentPlayer == players[2])
             {
-                if (players[0].PlayerStatus != PlayerStatus.FinishPlay )
+                Player temp = players[0] != null ? players[0] : players[1] != null ? players[1] : players[2];
+
+                if (temp.PlayerStatus != PlayerStatus.FinishPlay )
                 {
-                    currentPlayer = players[0];
+                    currentPlayer = temp;
                 }
             }
         }
@@ -173,6 +182,11 @@ namespace BlackJack.Logic
         {
             EndEventArgs args = new EndEventArgs(res);
             PlayerEndEvent(this, args);
+        }
+
+        public void UpdatePlayerHit()
+        {
+            HitEvent(this, new EventArgs());
         }
     }
 }

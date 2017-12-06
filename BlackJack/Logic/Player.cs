@@ -111,7 +111,7 @@ namespace BlackJack.Logic
 
             // Only decrease the balance by half of the current bet
             balance = balance - (bet / 2);
-            Hit();
+            //Hit();
         }
 
     }
