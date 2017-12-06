@@ -128,13 +128,12 @@ namespace BlackJack.Logic
             else if (currentPlayer == players[1])
             {
                 currentPlayer = players[2] != null ? players[2] : players[0] != null ? players[0] : players[1];
-                ///currentPlayer = players[2];
             }
             else if (currentPlayer == players[2])
             {
                 Player temp = players[0] != null ? players[0] : players[1] != null ? players[1] : players[2];
 
-                if (temp.PlayerStatus != PlayerStatus.FinishPlay )
+                if (temp.PlayerStatus != PlayerStatus.FinishPlay)
                 {
                     currentPlayer = temp;
                 }

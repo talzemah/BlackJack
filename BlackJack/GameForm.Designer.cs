@@ -858,7 +858,6 @@
             this.Name = "GameForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "GameForm";
-            this.Load += new System.EventHandler(this.GameForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.Pb_cardsDeck1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Pb_cardsDeck2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Pb_cardsDeck3)).EndInit();

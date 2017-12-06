@@ -97,15 +97,8 @@ namespace BlackJack
                 // All players are finish to play.
                 game.DealerPlay();
                 UpdateUIAfterDeal(this, new EventArgs());
-
                 EndGame();
-
-                //game.SelectFirstPlayer();
-                //UpdateCurrentForm();
-                //currentForm.EndGame(currentForm.GetGameResult());
             }
-
-
         }
 
         private void EndGame()
@@ -133,10 +126,8 @@ namespace BlackJack
                     gameForms[i].UpdateBalanceAndBetValue();
                 }
             }
-
             UpdateCurrentForm();
             currentForm.UpdateButtonsToPlay();
-
         }
 
         private bool UpdateCurrentForm()

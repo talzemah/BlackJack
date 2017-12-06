@@ -36,24 +36,27 @@
             // Lbl_chooseName
             // 
             this.Lbl_chooseName.AutoSize = true;
-            this.Lbl_chooseName.Location = new System.Drawing.Point(86, 65);
+            this.Lbl_chooseName.BackColor = System.Drawing.Color.Transparent;
+            this.Lbl_chooseName.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.Lbl_chooseName.ForeColor = System.Drawing.Color.Blue;
+            this.Lbl_chooseName.Location = new System.Drawing.Point(23, 91);
             this.Lbl_chooseName.Name = "Lbl_chooseName";
-            this.Lbl_chooseName.Size = new System.Drawing.Size(117, 17);
+            this.Lbl_chooseName.Size = new System.Drawing.Size(237, 31);
             this.Lbl_chooseName.TabIndex = 0;
             this.Lbl_chooseName.Text = "Enter your name:";
             // 
             // Tb_name
             // 
-            this.Tb_name.Location = new System.Drawing.Point(67, 114);
+            this.Tb_name.Location = new System.Drawing.Point(62, 133);
             this.Tb_name.Name = "Tb_name";
             this.Tb_name.Size = new System.Drawing.Size(150, 22);
             this.Tb_name.TabIndex = 1;
             // 
             // Btn_ok
             // 
-            this.Btn_ok.Location = new System.Drawing.Point(107, 197);
+            this.Btn_ok.Location = new System.Drawing.Point(86, 181);
             this.Btn_ok.Name = "Btn_ok";
-            this.Btn_ok.Size = new System.Drawing.Size(75, 23);
+            this.Btn_ok.Size = new System.Drawing.Size(100, 50);
             this.Btn_ok.TabIndex = 2;
             this.Btn_ok.Text = "OK";
             this.Btn_ok.UseVisualStyleBackColor = true;
@@ -63,6 +66,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = global::BlackJack.Properties.Resources.newPlayerBackground;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(282, 253);
             this.Controls.Add(this.Btn_ok);
             this.Controls.Add(this.Tb_name);

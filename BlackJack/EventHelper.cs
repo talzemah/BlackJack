@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BlackJack
 {
@@ -19,11 +15,14 @@ namespace BlackJack
         public String PlayerName { get; set; }
     }
 
+
     // Deal event
     public delegate void DealEventHandler(object sender, EventArgs e);
 
+
     // Player has finish to play event
     public delegate void PlayerFinishToPlayEventHandler(object sender, EventArgs e);
+
 
     // Player has End game event
     public delegate void PlayerEndPlayEventHandler(object sender, EndEventArgs e);
@@ -38,8 +37,10 @@ namespace BlackJack
         public String Res { get; set; }
     }
 
+
     // Hit event
     public delegate void HitEventHandler(object sender, EventArgs e);
+
 
     // Game close event
     public delegate void GameCloseEventHandler(object sender, EventArgs e);
